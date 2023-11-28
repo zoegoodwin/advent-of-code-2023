@@ -1,15 +1,15 @@
 # 🎄Advent of Code 2023🎄
 
 
-## ⭐ Overview
+## 🎀 Overview
 
 tbd
 
 
-### ▫️ Day 1
+### ⭐ Day 1
 
 tbd
 
-### ▫️ Day 2
+### ⭐ Day 2
 
 tbd
