@@ -1,12 +1,6 @@
 # 🎄Advent of Code 2023🎄
 
-
-## 🎀 Overview
-
-tbd
-
-
-### ⭐ Day 1
+### ⭐ Day 1: Trebuchet?!
 
 tbd
 
