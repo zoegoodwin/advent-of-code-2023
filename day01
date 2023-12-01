@@ -1,0 +1,74 @@
+# Day 1: Trebuchet?!
+
+
+# -- Part One -- ⭐
+
+def calc_calibration(file_path):
+
+    total_calibration = 0
+
+    with open(file_path, 'r') as file:
+        for line in file:
+            line = line.strip()  #trim whitespace
+            first_digit = None
+            last_digit = None
+
+            for char in line:
+                if char.isdigit():
+                    # if it's a digit and 1st is empty, assign to 1st
+                    if first_digit is None:
+                        first_digit = char
+                    # will keep assigning next digit in the line until last digit reached
+                    last_digit = char
+
+            if first_digit and last_digit:
+                calibration_value = int(first_digit + last_digit)
+                total_calibration += calibration_value
+
+    return total_calibration
+
+total = calc_calibration('day01input.txt')
+print("pt1 Total Calibration Value: ", total)
+
+
+# -- Part Two -- not working yet
+
+def calc_calibration_two(file_path):
+
+    total_calibration = 0
+
+    number_dict = {
+        "zero": "0", "one": "1", "two": "2", "three": "3", "four": "4",
+        "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"
+    }
+
+    with open(file_path, 'r') as file:
+        for line in file:
+            line = line.strip().lower()  #trim whitespace and convert to lowercase
+            first_digit = None
+            last_digit = None
+
+            # handles number words
+            words = line.split()
+            for word in words:
+                if word.isdigit():
+                    digit = word
+                elif word in number_dict:
+                    digit = number_dict[word]
+                else:
+                    continue
+
+                # if it's a digit and 1st is empty, assign to 1st
+                if first_digit is None:
+                    first_digit = digit
+                # will keep assigning next digit in the line until last digit reached
+                last_digit = digit
+
+            if first_digit and last_digit:
+                calibration_value = int(first_digit + last_digit)
+                total_calibration += calibration_value
+
+    return total_calibration
+
+total_2 = calc_calibration_two('day01input.txt')
+print("pt2 Total Calibration Value: ", total_2)
