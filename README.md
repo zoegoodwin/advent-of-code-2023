@@ -2,8 +2,5 @@
 
 ### ⭐ Day 1: Trebuchet?!
 
-tbd
+### Day 2
 
-### ⭐ Day 2
-
-tbd
