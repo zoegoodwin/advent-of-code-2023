@@ -1,5 +1,6 @@
 # Day 1: Trebuchet?!
 
+import regex as rx  # for pt2
 
 # -- Part One -- ⭐
 
@@ -31,42 +32,31 @@ total = calc_calibration('day01input.txt')
 print("pt1 Total Calibration Value: ", total)
 
 
-# -- Part Two -- not working yet
+# -- Part Two -- ⭐
 
 def calc_calibration_two(file_path):
 
-    total_calibration = 0
-
     number_dict = {
-        "zero": "0", "one": "1", "two": "2", "three": "3", "four": "4",
-        "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"
+        "one": "1", "two": "2", "three": "3", "four": "4", "five": "5",
+        "six": "6", "seven": "7", "eight": "8", "nine": "9"
     }
 
     with open(file_path, 'r') as file:
-        for line in file:
-            line = line.strip().lower()  #trim whitespace and convert to lowercase
-            first_digit = None
-            last_digit = None
+        lines = file.read().splitlines()
 
-            # handles number words
-            words = line.split()
-            for word in words:
-                if word.isdigit():
-                    digit = word
-                elif word in number_dict:
-                    digit = number_dict[word]
-                else:
-                    continue
+    def spelled_number(n: str):
+        if n.isdigit():
+            return n
+        return number_dict[n]
 
-                # if it's a digit and 1st is empty, assign to 1st
-                if first_digit is None:
-                    first_digit = digit
-                # will keep assigning next digit in the line until last digit reached
-                last_digit = digit
+    overlap = "(?=(" + "|".join(number_dict.keys()) + "|\\d))"
 
-            if first_digit and last_digit:
-                calibration_value = int(first_digit + last_digit)
-                total_calibration += calibration_value
+    total_calibration = 0
+
+    for line in lines:
+        digits = rx.findall(overlap, line)
+        digits = [*map(spelled_number, digits)]
+        total_calibration += (int(f'{digits[0]}{digits[-1]}'))
 
     return total_calibration
 
