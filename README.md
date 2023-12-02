@@ -5,5 +5,5 @@
 - Overlapping values were sneaky problems
 - Learned about regex
 
-### Day 2
+### Day 2: Cube Conundrum
 
