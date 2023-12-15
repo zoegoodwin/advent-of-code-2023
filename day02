@@ -1,0 +1,89 @@
+# Day 2: Cube Conundrum
+
+# Part One
+
+def parse_input_pt1(input_file):
+    game_id_set = set()
+
+    max_red, max_green, max_blue = 12, 13, 14
+
+    with open(input_file, 'r') as input_file:
+        for line in input_file:
+            if line.strip():
+                game_title, game_data = line.strip().split(':')
+                split_gt = game_title.split(' ')
+                game_number = int(split_gt[1])
+                cset = game_data.split(';')
+
+                game_valid = True
+
+                for set_data in cset:
+                    cubes = set_data.split(',')
+
+                    for cube_data in cubes:
+                        split_cd = cube_data.strip().split(' ')
+                        cube_count = int(split_cd[0])
+                        cube_colour = split_cd[1]
+
+                        if (cube_colour == 'red' and cube_count > max_red) or \
+                                (cube_colour == 'green' and cube_count > max_green) or \
+                                (cube_colour == 'blue' and cube_count > max_blue):
+                            game_valid = False
+                            break
+
+                    if not game_valid:
+                        break
+
+                if game_valid:
+                    game_id_set.add(game_number)
+
+        game_id_list = list(game_id_set)
+        print(f"Game ID List: {game_id_list}")
+        print(sum(game_id_list))
+
+answer = parse_input_pt1('day02input.txt')
+print(answer)
+
+
+# Part Two
+
+def parse_input_pt2(input_file):
+    total_power = 0
+
+    with open(input_file, 'r') as input_file:
+        for line in input_file:
+            if line.strip():
+                game_title, game_data = line.strip().split(':')
+                split_gt = game_title.split(' ')
+                game_number = int(split_gt[1])
+                cset = game_data.split(';')
+
+                min_red, min_green, min_blue = 0, 0, 0
+
+                for set_data in cset:
+                    current_red, current_green, current_blue = 0, 0, 0
+
+                    cubes = set_data.split(',')
+                    for cube_data in cubes:
+                        split_cd = cube_data.strip().split(' ')
+                        cube_count = int(split_cd[0])
+                        cube_colour = split_cd[1]
+
+                        if cube_colour == 'red':
+                            current_red = cube_count
+                        elif cube_colour == 'green':
+                            current_green = cube_count
+                        elif cube_colour == 'blue':
+                            current_blue = cube_count
+
+                        min_red = max(min_red, current_red)
+                        min_green = max(min_green, current_green)
+                        min_blue = max(min_blue, current_blue)
+
+                game_power = min_red * min_green * min_blue
+                total_power += game_power
+
+    return total_power
+
+answer2 = (parse_input_pt2('day02input.txt'))
+print(f"Total Power of Sets: {answer2}")
